@@ -1,10 +1,19 @@
+/////////////////////////////////////////////////////////////////////////
+// IMPORTS
+/////////////////////////////////////////////////////////////////////////
+
 // NPM Imports
 const express = require("express");
-const cors = require("cors");
 const app = express();
-require("dotenv").config();
+const cors = require("cors");
+const mongoose = require("mongoose");
 
-// Middleware for Testing
+// Route Imports
+const listItemRoutes = require("./routes/listItemRoutes");
+
+/////////////////////////////////////////////////////////////////////////
+// MIDDLEWARE
+/////////////////////////////////////////////////////////////////////////
 
 // CORS Config
 app.use(cors());
@@ -19,16 +28,40 @@ app.use((req, res, next) => {
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
-// Route Imports
-const listItemRoutes = require("./routes/listItemRoutes");
+/////////////////////////////////////////////////////////////////////////
+// CONFIG
+/////////////////////////////////////////////////////////////////////////
+
+// .env Config
+require("dotenv").config();
 
 // Route Config
 app.use("/listItems", listItemRoutes);
 
+/////////////////////////////////////////////////////////////////////////
+// DEVELOPMENT
+/////////////////////////////////////////////////////////////////////////
+
+// Root Route
 app.get("/", (req, res) => {
     res.send("I AM ROOT");
 });
 
-app.listen(process.env.PORT, () => {
-    console.log("App is running on port", process.env.PORT);
+// Connect to DB
+mongoose.connect(process.env.MONGO_URI)
+.then(() => {
+    app.listen(process.env.PORT, () => {
+        console.log("App is connected to DB and is running on port", process.env.PORT);
+    });
+})
+.catch((err) => {
+    console.log(err);
 });
+
+/////////////////////////////////////////////////////////////////////////
+// LISTENING
+/////////////////////////////////////////////////////////////////////////
+
+// app.listen(process.env.PORT, () => {
+//     console.log("App is running on port", process.env.PORT);
+// });
