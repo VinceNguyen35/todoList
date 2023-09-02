@@ -13,12 +13,12 @@ const Body = () => {
         const response = await fetch("http://localhost:8000/listItems", {
             method: "POST",
             headers: {"Content-Type": "application/json"},
-            body: JSON.stringify({newTask})
+            body: JSON.stringify({task: newTask})
         });
-        console.log("new task:", newTask);
         const json = await response.json();
         if(response.ok) {
-            console.log("Received task from server", json.newTask);
+            console.log("Received task from server", json.task);
+            console.log("New task id:", json._id);
         }
     }
 
