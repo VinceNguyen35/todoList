@@ -1,5 +1,6 @@
-// NPM Imports
+// Imports
 const express = require("express");
+const ListItem = require("../models/listItemModel");
 const router = express.Router();
 
 // GET: Gets all tasks
@@ -8,10 +9,14 @@ router.get("/", (req, res) => {
 });
 
 // POST: Creates a new task
-router.post("/", (req, res) => {
+router.post("/", async (req, res) => {
     const newTask = req.body;
-    console.log("Hit the post route in server", newTask);
-    res.json(req.body);
+    try {
+        const listItem = await ListItem.create(newTask);
+        res.status(200).json(listItem);
+    } catch(err) {
+        res.status(400).json({error: err.message});
+    }
 });
 
 // GET: Gets a single task
