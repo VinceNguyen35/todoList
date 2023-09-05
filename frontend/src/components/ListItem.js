@@ -12,7 +12,7 @@ const ListItem = ({index, task, editTask, setEditTask, handleEdit, handleDelete}
         <div>
             {
                 !isEditing &&
-                <h3>{task}</h3>
+                <h3>{task.task}</h3>
             }
             {
                 !isEditing &&
@@ -35,7 +35,8 @@ const ListItem = ({index, task, editTask, setEditTask, handleEdit, handleDelete}
                 </form>
             }
             <button
-                onClick={() => {handleDelete(index)}}>Delete Task
+                onClick={() => {handleDelete(index)}}>
+                Delete Task
             </button>
         </div>
     );

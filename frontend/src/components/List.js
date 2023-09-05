@@ -1,8 +1,6 @@
 import ListItem from "./ListItem"
 
 const List = ({listItems, setListItems, editTask, setEditTask, handleEdit, handleDelete}) => { 
-    
-    
     return (
         <div>
             {listItems.map((task, index) => (

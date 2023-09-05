@@ -4,8 +4,13 @@ const ListItem = require("../models/listItemModel");
 const router = express.Router();
 
 // GET: Gets all tasks
-router.get("/", (req, res) => {
-    res.json({ mssg: "GET all tasks" });
+router.get("/", async (req, res) => {
+    try {
+        const listItems = await ListItem.find().exec();
+        res.status(200).json(listItems);
+    } catch(err) {
+        res.status(400).json({error: err.message});
+    }
 });
 
 // POST: Creates a new task
@@ -30,8 +35,13 @@ router.patch("/:id", (req, res) => {
 });
 
 // DELETE: Deletes a single task
-router.delete("/:id", (req, res) => {
-    res.json({mssg: "DELETE a single task"});
+router.delete("/:id", async (req, res) => {
+    try {
+        const taskToDelete = await ListItem.findByIdAndDelete(req.params.id).exec();
+        res.status(200).json(taskToDelete);
+    } catch(err) {
+        res.status(400).json({error: err.message});
+    }
 });
 
 module.exports = router;
