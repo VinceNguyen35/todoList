@@ -24,14 +24,15 @@ router.post("/", async (req, res) => {
     }
 });
 
-// GET: Gets a single task
-router.get("/:id", (req, res) => {
-    res.json({mssg: "GET a single task"});
-});
-
 // PATCH: Updates a single task
-router.patch("/:id", (req, res) => {
-    res.json({mssg: "PATCH a single task"});
+router.patch("/:id", async (req, res) => {
+    const taskToEdit = req.body;
+    try {
+        const newTask = await ListItem.findByIdAndUpdate(req.params.id, taskToEdit, {new: true});
+        res.status(200).json(newTask);
+    } catch(err) {
+        res.status(400).json({error: err.message});
+    }
 });
 
 // DELETE: Deletes a single task

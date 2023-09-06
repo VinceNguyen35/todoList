@@ -17,12 +17,9 @@ const Body = () => {
                     listItems.push(taskItem);
                 });
                 setListItems([...listItems]);
-                console.log(listItems);
             }
         }
         fetchListItems();
-        console.log("useEffect Ran");
-
     },[]);
 
     const handleAdd = async (event) => {
@@ -34,16 +31,26 @@ const Body = () => {
         });
         const json = await response.json();
         if(response.ok) {
-            console.log("Received task from server", json.task);
             setListItems([...listItems, json]);
-            console.log("New task id:", json._id);
+            setNewTask("");
         }
     }
 
-    const handleEdit = (event, index) => {
+    const handleEdit = async (event, index) => {
         event.preventDefault();
-        listItems[index] = editTask;
-        setListItems([...listItems]);
+
+        // Update task item on backend
+        const response = await fetch("http://localhost:8000/listItems/" + listItems[index]._id, {
+            method: "PATCH",
+            headers: {"Content-Type": "application/json"},
+            body: JSON.stringify({task: editTask})
+        });
+        if(response.ok) {
+            // Update task item on frontend
+            listItems[index].task = editTask;
+            setListItems([...listItems]);
+            setEditTask("");
+        }
     }
 
     const handleDelete = async (index) => {
@@ -53,9 +60,7 @@ const Body = () => {
             method: "DELETE",
             body: JSON.stringify({id: taskToDelete._id})
         });
-        const deletedTask = await response.json();
         if(response.ok) {
-            console.log("Deleted task:", deletedTask);
             // Update list on frontend
             const newList = listItems.filter(task => listItems.indexOf(task) !== index);
             setListItems(newList);

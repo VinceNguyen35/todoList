@@ -39,13 +39,8 @@ require("dotenv").config();
 app.use("/listItems", listItemRoutes);
 
 /////////////////////////////////////////////////////////////////////////
-// DEVELOPMENT
+// LISTENING
 /////////////////////////////////////////////////////////////////////////
-
-// Root Route
-app.get("/", (req, res) => {
-    res.send("I AM ROOT");
-});
 
 // Connect to DB
 mongoose.connect(process.env.MONGO_URI)
@@ -57,11 +52,3 @@ mongoose.connect(process.env.MONGO_URI)
 .catch((err) => {
     console.log(err);
 });
-
-/////////////////////////////////////////////////////////////////////////
-// LISTENING
-/////////////////////////////////////////////////////////////////////////
-
-// app.listen(process.env.PORT, () => {
-//     console.log("App is running on port", process.env.PORT);
-// });
