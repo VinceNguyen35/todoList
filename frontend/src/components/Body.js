@@ -13,10 +13,7 @@ const Body = () => {
             const json = await response.json();
             // Response will return an array of objects if working
             if(response.ok) {
-                json.forEach((taskItem) => {
-                    listItems.push(taskItem);
-                });
-                setListItems([...listItems]);
+                setListItems(json);
             }
         }
         fetchListItems();
