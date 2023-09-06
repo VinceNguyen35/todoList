@@ -65,7 +65,7 @@ const Body = () => {
     }
 
     return (
-        <div>
+        <div className="body">
             <AddTask
                 newTask={newTask}
                 setNewTask={setNewTask}

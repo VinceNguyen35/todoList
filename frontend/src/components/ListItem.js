@@ -9,34 +9,37 @@ const ListItem = ({index, task, editTask, setEditTask, handleEdit, handleDelete}
     }
 
     return (
-        <div>
+        <div className="list-item">
             {
                 !isEditing &&
-                <h3>{task.task}</h3>
+                <span>{task.task}</span>
             }
             {
                 !isEditing &&
                 <button
                     onClick={() => {setIsEditing(true)}}>
-                    Edit Task
+                        <img className="edit-icon" src="./pencil.svg" alt="small pencil for editing" />
                 </button>
             }
             {
                 isEditing && 
                 <form
                     onSubmit={(event) => { runHandleEdit(event, index) }}>
-                    <label>Edit Task Here: </label>
+                    <label>Edit Task: </label>
                     <input
+                        className="input-edit"
                         type="text"
                         value={editTask}
                         onChange={(event) => setEditTask(event.target.value)}
                     />
-                    <button>Edit Task</button>
+                    <button>
+                            <img className="edit-icon" src="./pencil.svg" alt="small pencil for editing" />
+                    </button>
                 </form>
             }
             <button
                 onClick={() => {handleDelete(index)}}>
-                Delete Task
+                <img className="delete-icon" src="./delete.svg" alt="small x for deleting" />
             </button>
         </div>
     );

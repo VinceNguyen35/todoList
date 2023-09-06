@@ -1,0 +1,92 @@
+/* Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Public+Sans&display=swap');
+
+/* Headers and Tags */
+body {
+    font-family: 'Public Sans', sans-serif;
+    color: #ffffff;
+    background-color: #b4e6ee;
+}
+
+h1 {
+    color: #cd7b29;
+    text-align: center;
+}
+
+form {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: 15px 0;
+    width: 100%;
+}
+
+input {
+    background-color: #ffd56a;
+    border: 0px;
+    font-size: 20px;
+    height: 37px;
+    outline: none;
+    padding: 0 10px;
+    width: 100%;
+}
+
+span {
+    font-size: 20px;
+    margin: 0;
+}
+
+button {
+    border: 0;
+    cursor: pointer;
+    height: 37px;
+    margin: 0;
+    padding: 0;
+    background-color: #8bc5cd;
+}
+
+/* Classes */
+.body {
+    background-color: #8bc5cd;
+    border: 12px solid #d59452;
+    border-radius: 25px;
+    margin: 0 auto;
+    width: 50%;
+}
+
+.list {
+    margin: 0 auto;
+    padding: 5px;
+    width: 90%;
+}
+
+.list-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    justify-content: flex-start;
+}
+
+.input-edit {
+    border: 5px solid #cd7b29;
+    border-radius: 10px;
+    margin-right: 10px;
+}
+
+.plus-icon {
+    background-color: #ffd56a;
+    height: 37px;
+    margin: 0 auto;
+}
+
+.edit-icon {
+    background-color: #8bc5cd;
+    height: 30px;
+    margin: 0 auto;
+}
+
+.delete-icon {
+    background-color: #8bc5cd;
+    height: 30px;
+    margin: 0 auto;
+}
